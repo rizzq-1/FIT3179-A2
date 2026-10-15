@@ -1,0 +1,34 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Small-multiple slope charts: share of Australians attending each art form in the 2022 and 2025 National Arts Participation Surveys. One panel per art form.",
+  "data": { "url": "data/naps_artform_year.csv", "format": { "type": "csv", "parse": { "rate": "number" } } },
+  "transform": [{ "filter": "isValid(datum.rate)" }],
+  "facet": { "field": "artform", "type": "nominal", "title": null, "sort": ["Any live arts event", "Music", "Festivals", "Visual arts and craft", "Theatre", "First Nations arts", "Dance", "Literary events"], "header": { "labelFontWeight": 600, "labelAnchor": "start" } },
+  "columns": 8,
+  "spacing": 14,
+  "spec": {
+    "width": 88,
+    "height": 200,
+    "encoding": {
+      "x": { "field": "year", "type": "ordinal", "title": null, "axis": { "labelAngle": 0, "domain": false, "ticks": false }, "scale": { "padding": 0.6 } },
+      "y": { "field": "rate", "type": "quantitative", "title": "Attended (%)", "scale": { "domain": [0, 80] }, "axis": { "tickCount": 4 } }
+    },
+    "layer": [
+      { "mark": { "type": "line", "strokeWidth": 2, "color": "#2a78d6" } },
+      {
+        "mark": { "type": "point", "filled": true, "size": 60, "opacity": 1, "color": "#2a78d6", "stroke": "#fcfcfb", "strokeWidth": 2 },
+        "encoding": {
+          "tooltip": [
+            { "field": "artform", "title": "Art form" },
+            { "field": "year", "title": "Survey" },
+            { "field": "rate", "title": "Attended (%)", "format": "d" }
+          ]
+        }
+      },
+      {
+        "mark": { "type": "text", "dy": -11, "fontSize": 11, "fontWeight": 600, "color": "#1b1a18" },
+        "encoding": { "text": { "field": "rate", "type": "quantitative", "format": "d" } }
+      }
+    ]
+  }
+}

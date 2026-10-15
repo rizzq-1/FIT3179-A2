@@ -1,0 +1,94 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Choropleth of adult attendance at cultural venues/events by state, linked to a bar chart of the change since 2017-18. Hover a state in either view to highlight it in both.",
+  "params": [
+    {
+      "name": "survey",
+      "value": "rate_2021_22",
+      "bind": {
+        "input": "radio",
+        "options": ["rate_2017_18", "rate_2021_22"],
+        "labels": ["2017–18", "2021–22"],
+        "name": "Survey year: "
+      }
+    }
+  ],
+  "hconcat": [
+    {
+      "width": 520,
+      "height": 420,
+      "projection": { "type": "conicEqualArea", "parallels": [-18, -36], "rotate": [-132, 0] },
+      "layer": [
+    {
+      "description": "Graticule: lines of latitude and longitude every 10 degrees, clipped to the Australian region.",
+      "data": { "graticule": { "extent": [[110, -45], [156, -9]], "step": [10, 10] } },
+      "mark": { "type": "geoshape", "fill": null, "stroke": "#d8d5ce", "strokeWidth": 0.5 }
+    },
+    {
+      "data": { "url": "js/aus_states.topojson", "format": { "type": "topojson", "feature": "aus_states" } },
+      "transform": [
+        { "calculate": "datum.properties.STATE_NAME", "as": "state" },
+        {
+          "lookup": "state",
+          "from": { "data": { "url": "data/abs_attendance_state.csv", "format": { "type": "csv", "parse": { "rate_2017_18": "number", "rate_2021_22": "number" } } }, "key": "state", "fields": ["rate_2017_18", "rate_2021_22"] }
+        },
+        { "calculate": "datum[survey]", "as": "rate" }
+      ],
+      "params": [
+        { "name": "hoverState", "select": { "type": "point", "fields": ["state"], "on": "pointerover", "clear": "pointerout" } }
+      ],
+      "mark": { "type": "geoshape", "stroke": "#fcfcfb", "strokeWidth": 1.5 },
+      "encoding": {
+        "color": {
+          "condition": { "test": "!isValid(datum.rate)", "value": "#f0efec" },
+          "field": "rate",
+          "type": "quantitative",
+          "title": "Adults attending (%)",
+          "scale": { "domain": [50, 95], "range": ["#cde2fb", "#0d366b"] },
+          "legend": { "orient": "bottom-left", "direction": "horizontal", "gradientLength": 180 }
+        },
+        "stroke": {
+          "condition": { "test": "vlSelectionTest('hoverState_store', datum, 'union', false) || vlSelectionTest('hoverBar_store', datum, 'union', false)", "value": "#1b1a18" },
+          "value": "#fcfcfb"
+        },
+        "tooltip": [
+          { "field": "state", "title": "State" },
+          { "field": "rate_2017_18", "title": "2017–18 (%)", "format": ".1f" },
+          { "field": "rate_2021_22", "title": "2021–22 (%)", "format": ".1f" }
+        ]
+      }
+    }
+      ]
+    },
+    {
+      "width": 260,
+      "height": 420,
+      "data": { "url": "data/abs_attendance_state.csv", "format": { "type": "csv", "parse": { "rate_2017_18": "number", "rate_2021_22": "number" } } },
+      "transform": [{ "calculate": "datum.rate_2021_22 - datum.rate_2017_18", "as": "change" }],
+      "params": [
+        { "name": "hoverBar", "select": { "type": "point", "fields": ["state"], "on": "pointerover", "clear": "pointerout" } }
+      ],
+      "mark": { "type": "bar", "cornerRadiusEnd": 4, "height": { "band": 0.7 } },
+      "encoding": {
+        "y": { "field": "state", "type": "nominal", "title": null, "sort": { "field": "change", "order": "ascending" } },
+        "x": { "field": "change", "type": "quantitative", "title": "Change since 2017–18 (percentage points)" },
+        "color": {
+          "condition": { "test": "datum.change >= 0", "value": "#2a78d6" },
+          "value": "#e34948"
+        },
+        "opacity": {
+          "condition": {
+            "test": "(!length(data('hoverState_store')) && !length(data('hoverBar_store'))) || vlSelectionTest('hoverState_store', datum) || vlSelectionTest('hoverBar_store', datum)",
+            "value": 1
+          },
+          "value": 0.35
+        },
+        "tooltip": [
+          { "field": "state", "title": "State" },
+          { "field": "change", "title": "Change (pp)", "format": "+.1f" }
+        ]
+      }
+    }
+  ],
+  "spacing": 24
+}

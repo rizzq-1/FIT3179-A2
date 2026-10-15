@@ -1,0 +1,43 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Dot map: one dot per museum, gallery or theatre. Click a legend entry to show one venue type.",
+  "width": "container",
+  "height": 360,
+  "projection": { "type": "conicEqualArea", "parallels": [-18, -36], "rotate": [-132, 0] },
+  "layer": [
+    {
+      "description": "Graticule: lines of latitude and longitude every 10 degrees, clipped to the Australian region.",
+      "data": { "graticule": { "extent": [[110, -45], [156, -9]], "step": [10, 10] } },
+      "mark": { "type": "geoshape", "fill": null, "stroke": "#d8d5ce", "strokeWidth": 0.5 }
+    },
+    {
+      "data": { "url": "js/aus_states.topojson", "format": { "type": "topojson", "feature": "aus_states" } },
+      "mark": { "type": "geoshape", "fill": "#ece9e3", "stroke": "#fcfcfb", "strokeWidth": 1.5 }
+    },
+    {
+      "data": { "url": "data/venues_osm.csv", "format": { "type": "csv", "parse": { "lat": "number", "lon": "number" } } },
+      "transform": [
+        { "filter": "datum.lon >= 112 && datum.lon <= 154.5", "description": "Mainland and Tasmania only: 10 venues on Norfolk, Lord Howe and the Cocos Islands fall outside the map." },
+        { "calculate": "datum.name ? datum.name : '(name not recorded)'", "as": "venue_name" }
+      ],
+      "params": [{ "name": "venueType", "select": { "type": "point", "fields": ["type"] }, "bind": "legend" }],
+      "mark": { "type": "circle", "size": 14 },
+      "encoding": {
+        "longitude": { "field": "lon", "type": "quantitative" },
+        "latitude": { "field": "lat", "type": "quantitative" },
+        "color": {
+          "field": "type",
+          "type": "nominal",
+          "title": "Venue",
+          "scale": { "domain": ["Museum", "Gallery", "Theatre"] },
+          "legend": { "orient": "bottom", "direction": "horizontal", "symbolSize": 80, "symbolOpacity": 1 }
+        },
+        "opacity": { "condition": { "param": "venueType", "value": 0.7 }, "value": 0.05 },
+        "tooltip": [
+          { "field": "venue_name", "title": "Venue" },
+          { "field": "type", "title": "Type" }
+        ]
+      }
+    }
+  ]
+}

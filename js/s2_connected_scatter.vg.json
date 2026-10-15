@@ -1,0 +1,54 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Connected scatterplot: national live-performance tickets sold (x) vs revenue (y), one point per year, joined in time order.",
+  "width": "container",
+  "height": 340,
+  "data": { "url": "data/lpa_national.csv", "format": { "type": "csv", "parse": { "year": "number", "attendance_m": "number", "revenue_m": "number", "avg_ticket_price": "number" } } },
+  "params": [
+    {
+      "name": "year_until",
+      "value": 2024,
+      "bind": { "input": "range", "min": 2010, "max": 2024, "step": 1, "name": "Show years up to: " }
+    }
+  ],
+  "transform": [
+    { "filter": "isValid(datum.attendance_m) && isValid(datum.revenue_m)" },
+    { "filter": "datum.year <= year_until" }
+  ],
+  "encoding": {
+    "x": { "field": "attendance_m", "type": "quantitative", "title": "Tickets sold (millions)", "scale": { "domain": [5, 33] } },
+    "y": { "field": "revenue_m", "type": "quantitative", "title": "Revenue ($ millions)", "scale": { "domain": [500, 3500] } },
+    "order": { "field": "year", "type": "quantitative" }
+  },
+  "layer": [
+    { "mark": { "type": "line", "strokeWidth": 2, "color": "#86b6ef" } },
+    {
+      "params": [{ "name": "hover", "select": { "type": "point", "on": "pointerover", "clear": "pointerout" } }],
+      "mark": { "type": "point", "filled": true, "size": 70, "color": "#2a78d6", "stroke": "#fcfcfb", "strokeWidth": 2 },
+      "encoding": {
+        "tooltip": [
+          { "field": "year", "title": "Year" },
+          { "field": "attendance_m", "title": "Tickets (m)", "format": ".1f" },
+          { "field": "revenue_m", "title": "Revenue ($m)", "format": ",.0f" },
+          { "field": "avg_ticket_price", "title": "Average ticket ($)", "format": ".2f" }
+        ]
+      }
+    },
+    {
+      "description": "Label only the years that tell the story.",
+      "transform": [{ "filter": { "field": "year", "oneOf": [2010, 2019, 2020, 2021, 2023, 2024] } }],
+      "mark": { "type": "text", "dx": 8, "dy": -8, "align": "left", "fontSize": 12, "fontWeight": 600, "color": "#1b1a18" },
+      "encoding": { "text": { "field": "year" } }
+    },
+    {
+      "description": "Text annotation for the COVID-19 shutdown (values from LPA 2024 report, page 8).",
+      "data": { "values": [{ "attendance_m": 7.76, "revenue_m": 606, "note": "Venues closed by COVID-19:" }, { "attendance_m": 7.76, "revenue_m": 606, "note": "7.8M tickets, down 67.5% on 2019" }] },
+      "transform": [
+        { "filter": "year_until >= 2020" },
+        { "window": [{ "op": "row_number", "as": "line" }] }
+      ],
+      "mark": { "type": "text", "align": "left", "dx": 14, "fontSize": 11, "fontStyle": "italic", "color": "#52514e", "dy": { "expr": "datum.line * 14 - 72" } },
+      "encoding": { "text": { "field": "note" }, "order": null }
+    }
+  ]
+}

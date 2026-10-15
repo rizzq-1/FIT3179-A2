@@ -1,0 +1,181 @@
+year,genre,attendance,revenue
+2010,Ballet and Dance,1023077,57.51
+2010,Children's/Family,974624,31.25
+2010,Circus and Physical Theatre,265837,9.9
+2010,Classical Music,962132,45.88
+2010,Comedy,792713,39.05
+2010,Contemporary Music,7028235,659.1
+2010,Festivals (Contemporary Music),1028170,100.92
+2010,Festivals (Multi-Category),263464,9.57
+2010,Musical Theatre,2612507,242.9
+2010,Opera,409541,40.13
+2010,Special Events,526503,31.45
+2010,Theatre,1354336,60.15
+2011,Ballet and Dance,947846,59.16
+2011,Children's/Family,1453012,58.78
+2011,Circus and Physical Theatre,728799,55.87
+2011,Classical Music,1048115,60.1
+2011,Comedy,1011342,52.0
+2011,Contemporary Music,5939618,539.27
+2011,Festivals (Contemporary Music),984946,96.45
+2011,Festivals (Multi-Category),242222,11.78
+2011,Musical Theatre,2799918,246.79
+2011,Opera,439041,47.31
+2011,Special Events,370239,15.8
+2011,Theatre,1380622,65.88
+2012,Ballet and Dance,920193,57.87
+2012,Children's/Family,1300334,51.59
+2012,Circus and Physical Theatre,555506,54.04
+2012,Classical Music,1254963,60.88
+2012,Comedy,981035,48.69
+2012,Contemporary Music,5484257,482.18
+2012,Festivals (Contemporary Music),1169233,98.37
+2012,Festivals (Multi-Category),260623,12.92
+2012,Musical Theatre,2224068,203.28
+2012,Opera,430904,47.84
+2012,Special Events,91189,4.25
+2012,Theatre,1601425,82.97
+2013,Ballet and Dance,976336,62.83
+2013,Children's/Family,1090598,38.68
+2013,Circus and Physical Theatre,1285991,142.03
+2013,Classical Music,1169643,70.48
+2013,Comedy,912609,41.47
+2013,Contemporary Music,6266137,628.13
+2013,Festivals (Contemporary Music),1053419,107.37
+2013,Festivals (Multi-Category),786530,25.62
+2013,Musical Theatre,2085131,193.39
+2013,Opera,344761,43.28
+2013,Special Events,113294,6.03
+2013,Theatre,1842177,119.65
+2014,Ballet and Dance,767890,52.77
+2014,Children's/Family,1214273,43.43
+2014,Circus and Physical Theatre,564676,46.09
+2014,Classical Music,1015122,64.87
+2014,Comedy,963108,45.15
+2014,Contemporary Music,6386058,604.96
+2014,Festivals (Contemporary Music),1281339,129.21
+2014,Festivals (Multi-Category),1059806,47.81
+2014,Musical Theatre,3182478,320.34
+2014,Opera,386927,42.62
+2014,Special Events,210390,10.98
+2014,Theatre,1504367,99.71
+2015,Ballet and Dance,859095,63.52
+2015,Children's/Family,1081003,38.37
+2015,Circus and Physical Theatre,974645,99.56
+2015,Classical Music,993906,56.4
+2015,Comedy,992399,54.92
+2015,Contemporary Music,5554811,477.9
+2015,Festivals (Contemporary Music),1300025,106.83
+2015,Festivals (Multi-Category),1486599,62.16
+2015,Musical Theatre,3258734,334.87
+2015,Opera,433198,41.51
+2015,Special Events,556914,20.34
+2015,Theatre,1135128,56.83
+2016,Ballet and Dance,815458,60.08
+2016,Children's/Family,1376254,54.32
+2016,Circus and Physical Theatre,838980,73.44
+2016,Classical Music,1219293,76.76
+2016,Comedy,1409299,86.38
+2016,Contemporary Music,5658753,440.08
+2016,Festivals (Contemporary Music),672771,79.87
+2016,Festivals (Multi-Category),1549007,56.64
+2016,Musical Theatre,3298051,347.68
+2016,Opera,407965,46.25
+2016,Special Events,185104,29.31
+2016,Theatre,1351653,79.58
+2017,Ballet and Dance,810483,62.34
+2017,Children's/Family,1305672,51.31
+2017,Circus and Physical Theatre,1165111,116.54
+2017,Classical Music,1318421,77.88
+2017,Comedy,1238460,72.31
+2017,Contemporary Music,8464739,826.05
+2017,Festivals (Contemporary Music),852628,100.66
+2017,Festivals (Multi-Category),1866148,54.64
+2017,Musical Theatre,4041827,416.8
+2017,Opera,369228,36.35
+2017,Special Events,136871,5.05
+2017,Theatre,1457962,64.22
+2018,Ballet and Dance,800781,63.99
+2018,Children's/Family,1650955,59.78
+2018,Circus and Physical Theatre,450446,23.41
+2018,Classical Music,1261565,79.46
+2018,Comedy,2458198,124.74
+2018,Contemporary Music,9608089,993.74
+2018,Festivals (Contemporary Music),975233,102.02
+2018,Festivals (Multi-Category),2577932,68.97
+2018,Musical Theatre,3917532,400.2
+2018,Opera,487195,46.97
+2018,Special Events,170359,22.12
+2018,Theatre,1430263,78.51
+2019,Ballet and Dance,803472,66.16
+2019,Children's/Family,1172129,43.65
+2019,Circus and Physical Theatre,639135,47.45
+2019,Classical Music,1316235,87.33
+2019,Comedy,2172296,103.22
+2019,Contemporary Music,8290100,835.54
+2019,Festivals (Contemporary Music),1447836,180.85
+2019,Festivals (Multi-Category),2174359,54.98
+2019,Musical Theatre,3451543,337.34
+2019,Opera,435525,40.2
+2019,Special Events,430873,21.35
+2019,Theatre,1530912,146.56
+2020,Ballet and Dance,137389,7.53
+2020,Children's/Family,378053,10.4
+2020,Circus and Physical Theatre,274977,22.69
+2020,Classical Music,289888,18.11
+2020,Comedy,338448,21.49
+2020,Contemporary Music,2872206,309.2
+2020,Festivals (Contemporary Music),437472,54.17
+2020,Festivals (Multi-Category),1567551,39.49
+2020,Musical Theatre,729099,67.05
+2020,Opera,147982,11.31
+2020,Special Events,166777,4.64
+2020,Theatre,421868,39.87
+2021,Ballet and Dance,363505,26.94
+2021,Children's/Family,1050643,34.3
+2021,Circus and Physical Theatre,272413,21.22
+2021,Classical Music,595349,37.97
+2021,Comedy,1171696,50.3
+2021,Contemporary Music,2731661,144.94
+2021,Festivals (Contemporary Music),461949,51.28
+2021,Festivals (Multi-Category),1554151,37.67
+2021,Musical Theatre,1784772,202.34
+2021,Opera,151299,15.65
+2021,Special Events,78708,2.6
+2021,Theatre,661694,53.56
+2022,Ballet and Dance,740572,63.34
+2022,Children's/Family,1487898,48.05
+2022,Circus and Physical Theatre,326315,22.72
+2022,Classical Music,1175646,88.92
+2022,Comedy,2132551,114.97
+2022,Contemporary Music,8699785,705.95
+2022,Festivals (Contemporary Music),1537353,234.41
+2022,Festivals (Multi-Category),2124802,70.1
+2022,Musical Theatre,4269750,519.02
+2022,Opera,225486,23.66
+2022,Special Events,142951,4.85
+2022,Theatre,1363926,111.36
+2023,Ballet and Dance,808177,70.36
+2023,Children's/Family,1709300,67.82
+2023,Circus and Physical Theatre,698111,68.3
+2023,Classical Music,1293241,90.37
+2023,Comedy,2879792,198.79
+2023,Contemporary Music,12006177,1486.4
+2023,Festivals (Contemporary Music),2030130,355.08
+2023,Festivals (Multi-Category),2411385,92.42
+2023,Musical Theatre,4288743,542.17
+2023,Opera,321477,39.94
+2023,Special Events,194708,3.16
+2023,Theatre,1437787,121.77
+2024,Ballet and Dance,724129,73.02
+2024,Children's/Family,1896269,77.15
+2024,Circus and Physical Theatre,386769,24.91
+2024,Classical Music,1391026,103.49
+2024,Comedy,2436661,170.86
+2024,Contemporary Music,14078287,1810.93
+2024,Festivals (Contemporary Music),2011084,331.29
+2024,Festivals (Multi-Category),2230801,84.09
+2024,Musical Theatre,4379315,531.59
+2024,Opera,267493,31.08
+2024,Special Events,262156,9.96
+2024,Theatre,1385989,105.45

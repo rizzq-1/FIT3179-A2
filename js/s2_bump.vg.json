@@ -1,0 +1,72 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Bump chart: rank of each live-performance category by tickets sold, 2010-2024. Three storyline categories are coloured; the rest stay grey. A dropdown highlights any category; hover thickens a line.",
+  "width": "container",
+  "height": 380,
+  "data": { "url": "data/lpa_genre_year.csv", "format": { "type": "csv", "parse": { "year": "number", "attendance": "number", "revenue": "number" } } },
+  "params": [
+    {
+      "name": "highlight",
+      "value": null,
+      "bind": {
+        "input": "select",
+        "options": [null, "Ballet and Dance", "Children's/Family", "Circus and Physical Theatre", "Classical Music", "Comedy", "Contemporary Music", "Festivals (Contemporary Music)", "Festivals (Multi-Category)", "Musical Theatre", "Opera", "Special Events", "Theatre"],
+        "labels": ["Contemporary Music, Musical Theatre, Comedy", "Ballet and Dance", "Children's/Family", "Circus and Physical Theatre", "Classical Music", "Comedy", "Contemporary Music", "Festivals (Contemporary Music)", "Festivals (Multi-Category)", "Musical Theatre", "Opera", "Special Events", "Theatre"],
+        "name": "Highlight an art form: "
+      }
+    }
+  ],
+  "transform": [
+    { "filter": "isValid(datum.attendance)" },
+    {
+      "window": [{ "op": "rank", "as": "rank" }],
+      "sort": [{ "field": "attendance", "order": "descending" }],
+      "groupby": ["year"]
+    },
+    { "calculate": "highlight ? datum.genre === highlight : indexof(['Contemporary Music', 'Musical Theatre', 'Comedy'], datum.genre) >= 0", "as": "featured" },
+    {
+      "description": "Colour each line: the dropdown choice in blue, otherwise the three storyline categories in fixed palette slots; everything else grey.",
+      "calculate": "!datum.featured ? '#d8d5ce' : highlight ? '#2a78d6' : {'Contemporary Music': '#2a78d6', 'Musical Theatre': '#eb6834', 'Comedy': '#1baf7a'}[datum.genre]",
+      "as": "hue"
+    }
+  ],
+  "encoding": {
+    "x": { "field": "year", "type": "ordinal", "title": null, "axis": { "labelAngle": 0 } },
+    "y": { "field": "rank", "type": "ordinal", "title": "Rank (1 = most tickets sold)", "axis": { "grid": false } },
+    "detail": { "field": "genre" }
+  },
+  "layer": [
+    {
+      "params": [{ "name": "hover", "select": { "type": "point", "fields": ["genre"], "on": "pointerover", "clear": "pointerout" } }],
+      "mark": { "type": "line", "strokeWidth": 2 },
+      "encoding": {
+        "color": { "field": "hue", "type": "nominal", "scale": null },
+        "strokeWidth": { "condition": { "param": "hover", "empty": false, "value": 4 }, "value": 2 },
+        "order": { "field": "featured", "type": "quantitative" }
+      }
+    },
+    {
+      "mark": { "type": "point", "filled": true, "size": 40, "stroke": "#fcfcfb", "strokeWidth": 1 },
+      "encoding": {
+        "color": { "field": "hue", "type": "nominal", "scale": null },
+        "tooltip": [
+          { "field": "genre", "title": "Category" },
+          { "field": "year", "title": "Year" },
+          { "field": "rank", "title": "Rank" },
+          { "field": "attendance", "title": "Tickets", "format": "," },
+          { "field": "revenue", "title": "Revenue ($m)", "format": ",.1f" }
+        ]
+      }
+    },
+    {
+      "description": "Direct labels at the right-hand end of each line.",
+      "transform": [{ "filter": "datum.year === 2024" }],
+      "mark": { "type": "text", "align": "left", "dx": 10, "fontSize": 12, "fontWeight": { "expr": "datum.featured ? 600 : 400" } },
+      "encoding": {
+        "text": { "field": "genre" },
+        "color": { "condition": { "test": "datum.featured", "value": "#1b1a18" }, "value": "#8a8883" }
+      }
+    }
+  ],
+  "padding": { "right": 190 }
+}

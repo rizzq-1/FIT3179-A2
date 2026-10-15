@@ -1,0 +1,83 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Treemap (Vega): live-performance revenue by category in 2024. Area = revenue.",
+  "width": 460,
+  "height": 340,
+  "padding": 0,
+  "autosize": "none",
+  "data": [
+    {
+      "name": "raw",
+      "url": "data/lpa_genre_year.csv",
+      "format": { "type": "csv", "parse": { "year": "number", "revenue": "number" } },
+      "transform": [{ "type": "filter", "expr": "datum.year === 2024 && isValid(datum.revenue)" }]
+    },
+    {
+      "name": "tree",
+      "source": "raw",
+      "transform": [
+        { "type": "formula", "as": "parent", "expr": "'root'" },
+        { "type": "formula", "as": "id", "expr": "datum.genre" }
+      ]
+    },
+    {
+      "name": "rootNode",
+      "values": [{ "id": "root", "parent": null }]
+    },
+    {
+      "name": "all",
+      "source": ["rootNode", "tree"],
+      "transform": [
+        { "type": "stratify", "key": "id", "parentKey": "parent" },
+        {
+          "type": "treemap",
+          "field": "revenue",
+          "sort": { "field": "value", "order": "descending" },
+          "method": "squarify",
+          "round": true,
+          "paddingInner": 2,
+          "size": [{ "signal": "width" }, { "signal": "height" }]
+        },
+        { "type": "filter", "expr": "datum.id !== 'root'" }
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "rect",
+      "from": { "data": "all" },
+      "encode": {
+        "enter": {
+          "x": { "field": "x0" },
+          "y": { "field": "y0" },
+          "x2": { "field": "x1" },
+          "y2": { "field": "y1" },
+          "cornerRadius": { "value": 3 },
+          "tooltip": { "signal": "{'Category': datum.genre, 'Revenue ($m)': format(datum.revenue, ',.0f')}" }
+        },
+        "update": {
+          "fill": { "signal": "datum.genre === 'Contemporary Music' ? '#2a78d6' : '#86b6ef'" },
+          "opacity": { "value": 1 }
+        },
+        "hover": { "opacity": { "value": 0.8 } }
+      }
+    },
+    {
+      "type": "text",
+      "from": { "data": "all" },
+      "interactive": false,
+      "encode": {
+        "enter": {
+          "x": { "signal": "datum.x0 + 6" },
+          "y": { "signal": "datum.y0 + 16" },
+          "text": { "signal": "(datum.x1 - datum.x0) > 70 && (datum.y1 - datum.y0) > 22 ? datum.genre : ''" },
+          "limit": { "signal": "datum.x1 - datum.x0 - 10" },
+          "font": { "value": "Source Sans 3" },
+          "fontSize": { "value": 12 },
+          "fontWeight": { "value": 600 },
+          "fill": { "signal": "datum.genre === 'Contemporary Music' ? '#ffffff' : '#0d366b'" }
+        }
+      }
+    }
+  ]
+}

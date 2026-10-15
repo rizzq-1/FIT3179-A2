@@ -1,0 +1,36 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Waffle chart: 100 squares, each one in 100 Australians aged 15+. Filled squares = share who attended a live arts event or festival in 2025.",
+  "width": 300,
+  "height": 300,
+  "data": { "sequence": { "start": 0, "stop": 100, "as": "i" } },
+  "transform": [
+    { "calculate": "'attended_live_arts'", "as": "metric" },
+    {
+      "lookup": "metric",
+      "from": {
+        "data": { "url": "data/naps_headline.csv", "format": { "type": "csv", "parse": { "value": "number" } } },
+        "key": "metric",
+        "fields": ["value", "label"]
+      }
+    },
+    { "calculate": "datum.i % 10", "as": "col" },
+    { "calculate": "floor(datum.i / 10)", "as": "row" },
+    { "calculate": "datum.i < round(datum.value) ? 'Attended' : 'Did not attend'", "as": "status" }
+  ],
+  "mark": { "type": "square", "size": 520, "cornerRadius": 4 },
+  "encoding": {
+    "x": { "field": "col", "type": "ordinal", "axis": null },
+    "y": { "field": "row", "type": "ordinal", "axis": null, "sort": "descending" },
+    "color": {
+      "field": "status",
+      "type": "nominal",
+      "scale": { "domain": ["Attended", "Did not attend"], "range": ["#2a78d6", "#e2dfd8"] },
+      "legend": { "orient": "bottom", "title": null }
+    },
+    "tooltip": [
+      { "field": "label", "title": "Measure" },
+      { "field": "value", "title": "Per cent of Australians 15+", "format": ".0f" }
+    ]
+  }
+}

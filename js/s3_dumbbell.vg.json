@@ -1,0 +1,58 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Dumbbell chart: attendance rate at any cultural venue or event by age group, before COVID (2017-18) and during it (2021-22).",
+  "width": "container",
+  "height": 300,
+  "data": { "url": "data/abs_attendance_age.csv", "format": { "type": "csv", "parse": { "rate": "number" } } },
+  "transform": [{ "filter": "isValid(datum.rate)" }],
+  "encoding": {
+    "y": { "field": "age_group", "type": "ordinal", "title": null, "sort": null },
+    "x": { "field": "rate", "type": "quantitative", "title": "Per cent who attended", "scale": { "domain": [0, 100] } }
+  },
+  "layer": [
+    {
+      "mark": { "type": "rule", "strokeWidth": 3, "color": "#c9c6bf" },
+      "encoding": {
+        "x": { "aggregate": "min", "field": "rate" },
+        "x2": { "aggregate": "max", "field": "rate" }
+      }
+    },
+    {
+      "mark": { "type": "point", "filled": true, "size": 140, "opacity": 1, "stroke": "#fcfcfb", "strokeWidth": 2 },
+      "encoding": {
+        "color": {
+          "field": "year",
+          "type": "nominal",
+          "title": "Survey",
+          "scale": { "domain": ["2017-18", "2021-22"], "range": ["#8a8883", "#2a78d6"] },
+          "legend": { "orient": "top" }
+        },
+        "tooltip": [
+          { "field": "age_group", "title": "Age" },
+          { "field": "year", "title": "Survey" },
+          { "field": "rate", "title": "Attended (%)", "format": ".1f" }
+        ]
+      }
+    },
+    {
+      "description": "Text annotation: the fall in percentage points, placed left of each 2021-22 dot. The largest fall is in bold.",
+      "transform": [
+        { "pivot": "year", "value": "rate", "groupby": ["age_group"] },
+        { "calculate": "datum['2021-22'] - datum['2017-18']", "as": "fall" },
+        { "joinaggregate": [{ "op": "min", "field": "fall", "as": "biggest_fall" }] }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -12,
+        "fontSize": 11,
+        "color": "#52514e",
+        "fontWeight": { "expr": "datum.fall === datum.biggest_fall ? 700 : 400" }
+      },
+      "encoding": {
+        "x": { "field": "2021-22", "type": "quantitative" },
+        "text": { "field": "fall", "type": "quantitative", "format": "+.1f" }
+      }
+    }
+  ]
+}

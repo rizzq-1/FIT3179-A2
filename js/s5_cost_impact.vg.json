@@ -1,0 +1,55 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Diverging stacked bar: responses to four statements about the cost of arts events (2025). Agreement extends right of the centre line; all other answers extend left.",
+  "width": "container",
+  "height": 220,
+  "data": { "url": "data/naps_cost_impact.csv", "format": { "type": "csv", "parse": { "pct": "number" } } },
+  "transform": [
+    { "calculate": "datum.response === 'Agree' ? datum.pct : -datum.pct", "as": "signed" },
+    { "calculate": "indexof(['Agree', 'Neither', 'Disagree', \"Didn't buy tickets\"], datum.response)", "as": "position" }
+  ],
+  "encoding": {
+    "y": { "field": "statement", "type": "nominal", "title": null, "sort": null, "axis": { "labelLimit": 300 } }
+  },
+  "layer": [
+    {
+      "mark": { "type": "bar", "height": { "band": 0.65 }, "stroke": "#fcfcfb", "strokeWidth": 2 },
+      "encoding": {
+        "x": {
+          "field": "signed",
+          "type": "quantitative",
+          "stack": "zero",
+          "title": "Per cent of Australians aged 15 and over",
+          "scale": { "domain": [-80, 60] },
+          "axis": { "labelExpr": "abs(datum.value)" }
+        },
+        "order": { "field": "position", "type": "quantitative" },
+        "color": {
+          "field": "response",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": ["Agree", "Neither", "Disagree", "Didn't buy tickets"],
+            "range": ["#2a78d6", "#c9c6bf", "#e34948", "#ece9e3"]
+          },
+          "legend": { "orient": "top" }
+        },
+        "tooltip": [
+          { "field": "statement", "title": "Statement" },
+          { "field": "response", "title": "Answer" },
+          { "field": "pct", "title": "Per cent" }
+        ]
+      }
+    },
+    {
+      "description": "Direct label on the 'Agree' segment only.",
+      "transform": [{ "filter": "datum.response === 'Agree'" }],
+      "mark": { "type": "text", "align": "left", "dx": 6, "fontSize": 12, "fontWeight": 600, "color": "#1b1a18" },
+      "encoding": {
+        "x": { "field": "pct", "type": "quantitative" },
+        "text": { "field": "pct", "type": "quantitative", "format": "d" }
+      }
+    },
+    { "mark": { "type": "rule", "color": "#52514e" }, "encoding": { "x": { "datum": 0 }, "y": { "value": 0 }, "y2": { "value": 220 } } }
+  ]
+}

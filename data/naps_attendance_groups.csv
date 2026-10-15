@@ -1,0 +1,13 @@
+dimension,group,rate
+Age,15–24,85
+Age,25–49,82
+Age,50 and over,63
+Where they live,Major cities,76
+Where they live,Regional and remote,69
+Income,"Under $70,000",62
+Income,"$70,000–$139,999",79
+Income,"$140,000 and over",84
+Disability,With disability,70
+Disability,Without disability,75
+Learned an art form at school age,Yes,80
+Learned an art form at school age,No,58

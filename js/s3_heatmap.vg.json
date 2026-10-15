@@ -1,0 +1,38 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Heatmap: attendance rate (2021-22) for each age group and venue type. Darker = more people attended.",
+  "width": "container",
+  "height": 300,
+  "data": { "url": "data/abs_attendance_age_venue.csv", "format": { "type": "csv", "parse": { "rate": "number" } } },
+  "encoding": {
+    "x": { "field": "age_group", "type": "ordinal", "title": "Age group", "sort": null, "axis": { "labelAngle": 0 } },
+    "y": { "field": "venue", "type": "nominal", "title": null, "sort": null }
+  },
+  "layer": [
+    {
+      "mark": { "type": "rect", "stroke": "#fcfcfb", "strokeWidth": 2, "cornerRadius": 2 },
+      "encoding": {
+        "color": {
+          "condition": { "test": "!isValid(datum.rate)", "value": "#f0efec" },
+          "field": "rate",
+          "type": "quantitative",
+          "title": "Attended (%)",
+          "scale": { "range": ["#cde2fb", "#0d366b"] }
+        },
+        "tooltip": [
+          { "field": "venue", "title": "Venue" },
+          { "field": "age_group", "title": "Age" },
+          { "field": "rate", "title": "Attended (%)", "format": ".1f" }
+        ]
+      }
+    },
+    {
+      "transform": [{ "filter": "isValid(datum.rate)" }],
+      "mark": { "type": "text", "fontSize": 11 },
+      "encoding": {
+        "text": { "field": "rate", "type": "quantitative", "format": ".0f" },
+        "color": { "condition": { "test": "datum.rate > 40", "value": "#ffffff" }, "value": "#1b1a18" }
+      }
+    }
+  ]
+}

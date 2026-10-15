@@ -1,0 +1,54 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Proportional symbol map: circle at each capital city sized by live-performance tickets per 1,000 residents (2024), coloured by change from 2023.",
+  "width": "container",
+  "height": 360,
+  "projection": { "type": "conicEqualArea", "parallels": [-18, -36], "rotate": [-132, 0] },
+  "layer": [
+    {
+      "description": "Graticule: lines of latitude and longitude every 10 degrees, clipped to the Australian region.",
+      "data": { "graticule": { "extent": [[110, -45], [156, -9]], "step": [10, 10] } },
+      "mark": { "type": "geoshape", "fill": null, "stroke": "#d8d5ce", "strokeWidth": 0.5 }
+    },
+    {
+      "data": { "url": "js/aus_states.topojson", "format": { "type": "topojson", "feature": "aus_states" } },
+      "mark": { "type": "geoshape", "fill": "#ece9e3", "stroke": "#fcfcfb", "strokeWidth": 1.5 }
+    },
+    {
+      "data": { "url": "data/lpa_state.csv", "format": { "type": "csv", "parse": { "attendance_2023": "number", "attendance_2024": "number", "revenue_2024": "number" } } },
+      "transform": [
+        { "lookup": "state", "from": { "data": { "url": "data/state_capitals.csv", "format": { "type": "csv", "parse": { "lat": "number", "lon": "number" } } }, "key": "state", "fields": ["capital", "lat", "lon"] } },
+        { "lookup": "state", "from": { "data": { "url": "data/abs_population_state.csv", "format": { "type": "csv", "parse": { "population": "number" } } }, "key": "state", "fields": ["population"] } },
+        { "filter": "isValid(datum.attendance_2024) && isValid(datum.population)" },
+        { "calculate": "1000 * datum.attendance_2024 / datum.population", "as": "per_1000" },
+        { "calculate": "100 * (datum.attendance_2024 - datum.attendance_2023) / datum.attendance_2023", "as": "change_pct" }
+      ],
+      "mark": { "type": "circle", "opacity": 0.85, "stroke": "#fcfcfb", "strokeWidth": 2 },
+      "encoding": {
+        "longitude": { "field": "lon", "type": "quantitative" },
+        "latitude": { "field": "lat", "type": "quantitative" },
+        "size": {
+          "field": "per_1000",
+          "type": "quantitative",
+          "title": "Tickets per 1,000 residents",
+          "scale": { "range": [80, 2400] },
+          "legend": { "orient": "bottom", "direction": "horizontal", "values": [200, 600, 1000, 1400], "symbolFillColor": "#c9c6bf", "symbolStrokeColor": "#8a8883" }
+        },
+        "color": {
+          "field": "change_pct",
+          "type": "quantitative",
+          "title": "Change from 2023 (%)",
+          "scale": { "domainMid": 0, "range": ["#e34948", "#f0efec", "#2a78d6"], "interpolate": "lab" },
+          "legend": { "orient": "bottom", "direction": "horizontal", "gradientLength": 140 }
+        },
+        "tooltip": [
+          { "field": "state", "title": "State" },
+          { "field": "capital", "title": "Capital" },
+          { "field": "attendance_2024", "title": "Tickets 2024", "format": "," },
+          { "field": "per_1000", "title": "Per 1,000 residents", "format": ",.0f" },
+          { "field": "change_pct", "title": "Change from 2023 (%)", "format": "+.1f" }
+        ]
+      }
+    }
+  ]
+}

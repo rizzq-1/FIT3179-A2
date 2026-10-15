@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Back to the Show? Australia's Cultural Comeback</title>
+  <meta name="description" content="How Australians of different ages and regions returned to museums, galleries, concerts, theatre and festivals after COVID-19.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Pure.css grid (as used in the FIT3179 studios) -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Australian cultural participation, 2010–2025</p>
+    <h1>Back to the Show?</h1>
+    <p class="lede">
+      [TODO: two-sentence hook. State the research question: has Australians'
+      return to museums, galleries, concerts, theatre and festivals after COVID
+      been shared equally across ages and regions, or has cost changed who goes?]
+    </p>
+    <p class="byline">By Adam Rizq Rozman · FIT3179 Data Visualisation 2 · October 2026</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 1 ─ A record year -->
+  <section id="record">
+    <h2><span class="num">01</span> A record year</h2>
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-md-1-2 prose">
+        <p>[TODO: what the 2025 National Arts Participation Survey found. Explain the waffle chart: each square = 1 in 100 Australians aged 15+.]</p>
+      </div>
+      <figure class="pure-u-1 pure-u-md-1-2">
+        <div id="vis-waffle" class="vis"></div>
+        <figcaption>Source: Creative Australia, National Arts Participation Survey 2025.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 2 ─ Twenty years of live performance -->
+  <section id="long-view">
+    <h2><span class="num">02</span> Fifteen years of live performance</h2>
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-md-1-2 prose">
+        <p>[TODO: the long-run trend. Point out the COVID loop and that revenue rose faster than attendance.]</p>
+      </div>
+      <figure class="pure-u-1 pure-u-md-1-2">
+        <div id="vis-connected" class="vis"></div>
+        <figcaption>Tickets sold vs revenue each year, 2010–2024. Source: Live Performance Australia.</figcaption>
+      </figure>
+    </div>
+    <figure class="full">
+      <div id="vis-bump" class="vis"></div>
+      <figcaption>Rank of each art form by tickets sold, 2010–2024. Source: Live Performance Australia.</figcaption>
+    </figure>
+  </section>
+
+  <!-- 3 ─ The COVID shock -->
+  <section id="covid">
+    <h2><span class="num">03</span> The COVID shock: who came back?</h2>
+    <p class="prose">[TODO: compare age groups before COVID (2017–18) and during it (2021–22). Note that the 2021–22 survey ran during lockdowns.]</p>
+    <div class="pure-g">
+      <figure class="pure-u-1 pure-u-md-1-2">
+        <div id="vis-dumbbell" class="vis"></div>
+        <figcaption>Share of each age group attending any cultural venue or event. Source: ABS.</figcaption>
+      </figure>
+      <figure class="pure-u-1 pure-u-md-1-2">
+        <div id="vis-heatmap" class="vis"></div>
+        <figcaption>Attendance rate by age group and venue type, 2021–22. Source: ABS.</figcaption>
+      </figure>
+    </div>
+    <figure class="full">
+      <div id="vis-slopes" class="vis"></div>
+      <figcaption>Share of Australians aged 15 and over attending each art form, 2022 and 2025. Source: Creative Australia, National Arts Participation Survey 2025.</figcaption>
+    </figure>
+  </section>
+
+  <!-- 4 ─ Where you live matters -->
+  <section id="where">
+    <h2><span class="num">04</span> Where you live matters</h2>
+    <p class="prose">[TODO: geography. Hover or click a state to highlight it in the bar chart.]</p>
+    <figure class="full">
+      <div id="vis-choropleth" class="vis"></div>
+      <figcaption>Adults attending a cultural venue or event, by state. Source: ABS.</figcaption>
+    </figure>
+    <div class="pure-g">
+      <figure class="pure-u-1 pure-u-md-1-2">
+        <div id="vis-symbol" class="vis"></div>
+        <figcaption>Live performance tickets per 1,000 residents, 2024. Sources: Live Performance Australia; ABS population.</figcaption>
+      </figure>
+      <figure class="pure-u-1 pure-u-md-1-2">
+        <div id="vis-dots" class="vis"></div>
+        <figcaption>Museums, galleries and theatres. Source: © OpenStreetMap contributors (ODbL).</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 5 ─ The price of culture -->
+  <section id="cost">
+    <h2><span class="num">05</span> The price of culture</h2>
+    <p class="prose">[TODO: cost as the main barrier, and who it affects most.]</p>
+    <div class="pure-g">
+      <figure class="pure-u-1 pure-u-md-1-2">
+        <div id="vis-barriers" class="vis"></div>
+        <figcaption>Change in the share of Australians naming each barrier, 2022 to 2025. The number beside each bar is the 2025 share. Source: Creative Australia, National Arts Participation Survey 2025, Figure 29.</figcaption>
+      </figure>
+      <figure class="pure-u-1 pure-u-md-1-2">
+        <div id="vis-treemap" class="vis"></div>
+        <figcaption>Live performance revenue by art form, 2024. Source: Live Performance Australia.</figcaption>
+      </figure>
+    </div>
+    <figure class="full">
+      <div id="vis-cost-impact" class="vis"></div>
+      <figcaption>How cost shaped ticket buying over the past 12 months. Source: Creative Australia, National Arts Participation Survey 2025, Figure 30.</figcaption>
+    </figure>
+    <figure class="full">
+      <div id="vis-who" class="vis"></div>
+      <figcaption>Who attended a live arts event or festival in 2025. Source: Creative Australia, National Arts Participation Survey 2025.</figcaption>
+    </figure>
+  </section>
+
+  <section id="conclusion">
+    <h2>So, are we back?</h2>
+    <p class="prose">[TODO: answer the research question in 3–4 sentences.]</p>
+  </section>
+
+</main>
+
+<footer class="wrap meta">
+  <h2>About this visualisation</h2>
+  <dl>
+    <dt>Author</dt><dd>Adam Rizq Rozman, Monash University, October 2026</dd>
+    <dt>Data</dt>
+    <dd>
+      <ul>
+        <li>Australian Bureau of Statistics, <a href="https://www.abs.gov.au/statistics/people/people-and-communities/cultural-and-creative-activities/2021-22">Cultural and Creative Activities, 2021–22</a> and <a href="https://www.abs.gov.au/ausstats/abs%40.nsf/mf/4114.0">Attendance at Selected Cultural Venues and Events (4114.0)</a>, CC BY 4.0</li>
+        <li>Creative Australia, <a href="https://www.creative.gov.au/research/creative-transformations-results-national-arts-participation-survey">Creative Transformations: National Arts Participation Survey 2025</a></li>
+        <li>Live Performance Australia, <a href="https://liveperformance.com.au/">Ticket Attendance and Revenue Reports</a></li>
+        <li>ABS, National, state and territory population (Estimated Resident Population), CC BY 4.0</li>
+        <li>State boundaries: <a href="https://github.com/rowanhogan/australian-states">rowanhogan/australian-states</a>, derived from ABS ASGS</li>
+        <li>Venue locations: © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, ODbL</li>
+      </ul>
+    </dd>
+    <dt>Tools</dt><dd>Vega-Lite 5, Vega 5, Vega-Embed. Fonts: Fraunces, Source Sans 3 (Google Fonts).</dd>
+    <dt>AI use</dt><dd>[TODO: acknowledge AI use as required by the unit, e.g. Claude was used to scaffold the page structure and chart specifications.]</dd>
+  </dl>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

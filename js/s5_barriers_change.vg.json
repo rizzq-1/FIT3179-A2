@@ -1,0 +1,41 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Diverging bar: change between 2022 and 2025 in the share of Australians naming each barrier to attending arts events. Red = a growing barrier, blue = a shrinking one.",
+  "width": "container",
+  "height": 300,
+  "data": { "url": "data/naps_barriers_year.csv", "format": { "type": "csv", "parse": { "pct_2022": "number", "pct_2025": "number" } } },
+  "transform": [{ "calculate": "datum.pct_2025 - datum.pct_2022", "as": "change" }],
+  "encoding": {
+    "y": { "field": "barrier", "type": "nominal", "title": null, "sort": { "field": "change", "op": "max", "order": "descending" }, "axis": { "labelLimit": 220 } }
+  },
+  "layer": [
+    {
+      "mark": { "type": "bar", "cornerRadiusEnd": 4, "height": { "band": 0.7 } },
+      "encoding": {
+        "x": { "field": "change", "type": "quantitative", "title": "Change 2022 → 2025 (percentage points)", "scale": { "domain": [-10, 10] } },
+        "color": { "condition": { "test": "datum.change > 0", "value": "#e34948" }, "value": "#2a78d6" },
+        "tooltip": [
+          { "field": "barrier", "title": "Barrier" },
+          { "field": "pct_2022", "title": "2022 (%)" },
+          { "field": "pct_2025", "title": "2025 (%)" },
+          { "field": "change", "title": "Change (points)", "format": "+d" }
+        ]
+      }
+    },
+    {
+      "description": "Direct label: the 2025 share, placed beyond the end of each bar.",
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "color": "#52514e",
+        "align": { "expr": "datum.change >= 0 ? 'left' : 'right'" },
+        "dx": { "expr": "datum.change >= 0 ? 6 : -6" }
+      },
+      "encoding": {
+        "x": { "field": "change", "type": "quantitative" },
+        "text": { "field": "pct_2025", "type": "quantitative", "format": "d" }
+      }
+    },
+    { "mark": { "type": "rule", "color": "#52514e" }, "encoding": { "x": { "datum": 0 }, "y": { "value": 0 }, "y2": { "value": 300 } } }
+  ]
+}
