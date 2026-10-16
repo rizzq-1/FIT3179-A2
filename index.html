@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
-  <!-- Pure.css grid (as used in the FIT3179 studios) -->
   <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
   <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css">
   <link rel="stylesheet" href="css/style.css">
@@ -25,9 +24,7 @@
     <p class="kicker">Australian cultural participation, 2010–2025</p>
     <h1>Back to the Show?</h1>
     <p class="lede">
-      [TODO: two-sentence hook. State the research question: has Australians'
-      return to museums, galleries, concerts, theatre and festivals after COVID
-      been shared equally across ages and regions, or has cost changed who goes?]
+      In 2025 a record 74% of Australians went to a live arts event or festival, but has that comeback reached every age group, region and budget equally?
     </p>
     <p class="byline">By Adam Rizq Rozman · FIT3179 Data Visualisation 2 · October 2026</p>
   </div>
@@ -40,7 +37,7 @@
     <h2><span class="num">01</span> A record year</h2>
     <div class="pure-g">
       <div class="pure-u-1 pure-u-md-1-2 prose">
-        <p>[TODO: what the 2025 National Arts Participation Survey found. Explain the waffle chart: each square = 1 in 100 Australians aged 15+.]</p>
+        <p>In 2025, 74% of Australians aged 15 and over (15.4 million people) attended a live arts event or festival, the highest level since the survey began in 2009; each square in the chart represents one in every 100 Australians.</p>
       </div>
       <figure class="pure-u-1 pure-u-md-1-2">
         <div id="vis-waffle" class="vis"></div>
@@ -54,7 +51,7 @@
     <h2><span class="num">02</span> Fifteen years of live performance</h2>
     <div class="pure-g">
       <div class="pure-u-1 pure-u-md-1-2 prose">
-        <p>[TODO: the long-run trend. Point out the COVID loop and that revenue rose faster than attendance.]</p>
+        <p>Ticket sales fell from 23.9 million in 2019 to 7.8 million in 2020 before climbing to a record 31.4 million in 2024, while revenue grew even faster as the average ticket price rose from $86 in 2010 to $115.</p>
       </div>
       <figure class="pure-u-1 pure-u-md-1-2">
         <div id="vis-connected" class="vis"></div>
@@ -70,7 +67,7 @@
   <!-- 3 ─ The COVID shock -->
   <section id="covid">
     <h2><span class="num">03</span> The COVID shock: who came back?</h2>
-    <p class="prose">[TODO: compare age groups before COVID (2017–18) and during it (2021–22). Note that the 2021–22 survey ran during lockdowns.]</p>
+    <p class="prose">Between 2017–18 and 2021–22, a period that included COVID-19 lockdowns, attendance at cultural venues and events fell in every age group, most sharply among 45–54-year-olds (down 21.6 percentage points).</p>
     <div class="pure-g">
       <figure class="pure-u-1 pure-u-md-1-2">
         <div id="vis-dumbbell" class="vis"></div>
@@ -90,7 +87,7 @@
   <!-- 4 ─ Where you live matters -->
   <section id="where">
     <h2><span class="num">04</span> Where you live matters</h2>
-    <p class="prose">[TODO: geography. Hover or click a state to highlight it in the bar chart.]</p>
+    <p class="prose">Attendance fell in every state and territory between 2017–18 and 2021–22, with Victoria dropping furthest (from 84% to 61%); hover over a state to highlight it in the bar chart.</p>
     <figure class="full">
       <div id="vis-choropleth" class="vis"></div>
       <figcaption>Adults attending a cultural venue or event, by state. Source: ABS.</figcaption>
@@ -110,7 +107,7 @@
   <!-- 5 ─ The price of culture -->
   <section id="cost">
     <h2><span class="num">05</span> The price of culture</h2>
-    <p class="prose">[TODO: cost as the main barrier, and who it affects most.]</p>
+    <p class="prose">Cost is now the biggest barrier to attending the arts, named by 60% of Australians in 2025 compared with 55% in 2022.</p>
     <div class="pure-g">
       <figure class="pure-u-1 pure-u-md-1-2">
         <div id="vis-barriers" class="vis"></div>
@@ -130,34 +127,7 @@
       <figcaption>Who attended a live arts event or festival in 2025. Source: Creative Australia, National Arts Participation Survey 2025.</figcaption>
     </figure>
   </section>
-
-  <section id="conclusion">
-    <h2>So, are we back?</h2>
-    <p class="prose">[TODO: answer the research question in 3–4 sentences.]</p>
-  </section>
-
 </main>
-
-<footer class="wrap meta">
-  <h2>About this visualisation</h2>
-  <dl>
-    <dt>Author</dt><dd>Adam Rizq Rozman, Monash University, October 2026</dd>
-    <dt>Data</dt>
-    <dd>
-      <ul>
-        <li>Australian Bureau of Statistics, <a href="https://www.abs.gov.au/statistics/people/people-and-communities/cultural-and-creative-activities/2021-22">Cultural and Creative Activities, 2021–22</a> and <a href="https://www.abs.gov.au/ausstats/abs%40.nsf/mf/4114.0">Attendance at Selected Cultural Venues and Events (4114.0)</a>, CC BY 4.0</li>
-        <li>Creative Australia, <a href="https://www.creative.gov.au/research/creative-transformations-results-national-arts-participation-survey">Creative Transformations: National Arts Participation Survey 2025</a></li>
-        <li>Live Performance Australia, <a href="https://liveperformance.com.au/">Ticket Attendance and Revenue Reports</a></li>
-        <li>ABS, National, state and territory population (Estimated Resident Population), CC BY 4.0</li>
-        <li>State boundaries: <a href="https://github.com/rowanhogan/australian-states">rowanhogan/australian-states</a>, derived from ABS ASGS</li>
-        <li>Venue locations: © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, ODbL</li>
-      </ul>
-    </dd>
-    <dt>Tools</dt><dd>Vega-Lite 5, Vega 5, Vega-Embed. Fonts: Fraunces, Source Sans 3 (Google Fonts).</dd>
-    <dt>AI use</dt><dd>[TODO: acknowledge AI use as required by the unit, e.g. Claude was used to scaffold the page structure and chart specifications.]</dd>
-  </dl>
-</footer>
-
 <script src="js/main.js"></script>
 </body>
 </html>
