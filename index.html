@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Back to the Show? Australia's Cultural Comeback</title>
+  <title>Australia's Cultural Participation</title>
   <meta name="description" content="How Australians of different ages and regions returned to museums, galleries, concerts, theatre and festivals after COVID-19.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Pure.css grid (as used in the FIT3179 studios) -->
   <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
   <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css">
   <link rel="stylesheet" href="css/style.css">
@@ -22,7 +23,7 @@
 <header class="hero">
   <div class="wrap">
     <p class="kicker">Australian cultural participation, 2010–2025</p>
-    <h1>Back to the Show?</h1>
+    <h1>Australia’s Creative Pulse</h1>
     <p class="lede">
       In 2025 a record 74% of Australians went to a live arts event or festival, but has that comeback reached every age group, region and budget equally?
     </p>
@@ -38,6 +39,8 @@
     <div class="pure-g">
       <div class="pure-u-1 pure-u-md-1-2 prose">
         <p>In 2025, 74% of Australians aged 15 and over (15.4 million people) attended a live arts event or festival, the highest level since the survey began in 2009; each square in the chart represents one in every 100 Australians.</p>
+        <p>That is up from 68% in 2022, and every art form gained audiences over those three years, with theatre rising the most (from 36% to 42%).</p>
+        <p>This page asks whether that recovery has been shared evenly. It compares age groups, states and incomes using data from the Australian Bureau of Statistics (ABS), Creative Australia and Live Performance Australia.</p>
       </div>
       <figure class="pure-u-1 pure-u-md-1-2">
         <div id="vis-waffle" class="vis"></div>
@@ -52,6 +55,9 @@
     <div class="pure-g">
       <div class="pure-u-1 pure-u-md-1-2 prose">
         <p>Ticket sales fell from 23.9 million in 2019 to 7.8 million in 2020 before climbing to a record 31.4 million in 2024, while revenue grew even faster as the average ticket price rose from $86 in 2010 to $115.</p>
+        <p>Each dot on the chart is one year, joined in time order. Since 2010, revenue has grown by 153% while tickets sold grew by 82%, so the line climbs more steeply than it moves to the right.</p>
+        <p>The dots for 2020 and 2021 drop to the bottom left, where COVID-19 closures pushed both tickets and revenue below their 2010 levels. Drag the slider to replay the years one at a time.</p>
+        <p>Below, the bump chart ranks each art form by tickets sold. Contemporary music has led every year since 2010, and comedy has climbed from eighth place in 2010 to third since 2022.</p>
       </div>
       <figure class="pure-u-1 pure-u-md-1-2">
         <div id="vis-connected" class="vis"></div>
@@ -67,31 +73,45 @@
   <!-- 3 ─ The COVID shock -->
   <section id="covid">
     <h2><span class="num">03</span> The COVID shock: who came back?</h2>
-    <p class="prose">Between 2017–18 and 2021–22, a period that included COVID-19 lockdowns, attendance at cultural venues and events fell in every age group, most sharply among 45–54-year-olds (down 21.6 percentage points).</p>
     <div class="pure-g">
+      <div class="pure-u-1 pure-u-md-1-2 prose">
+        <p>Between 2017–18 and 2021–22, a period that included COVID-19 lockdowns, attendance at cultural venues and events fell in every age group, most sharply among 45–54-year-olds (down 21.6 percentage points).</p>
+        <p>Young people still went out the most: 81% of 15–17-year-olds and 78% of 18–24-year-olds attended something in 2021–22, compared with 40% of people aged 75 and over.</p>
+        <p>The ABS survey covered July 2020 to June 2022, when venues in several states were closed for long periods, so these figures capture the shock rather than the recovery.</p>
+        <p>The heatmap shows cinemas were the most visited venue for every age group except people aged 75 and over, who were more likely to visit a library or archive. By 2025, Creative Australia's survey found attendance had risen for every art form since 2022.</p>
+      </div>
       <figure class="pure-u-1 pure-u-md-1-2">
         <div id="vis-dumbbell" class="vis"></div>
         <figcaption>Share of each age group attending any cultural venue or event. Source: ABS.</figcaption>
       </figure>
+    </div>
+    <div class="pure-g">
       <figure class="pure-u-1 pure-u-md-1-2">
         <div id="vis-heatmap" class="vis"></div>
         <figcaption>Attendance rate by age group and venue type, 2021–22. Source: ABS.</figcaption>
       </figure>
+      <figure class="pure-u-1 pure-u-md-1-2">
+        <div id="vis-slopes" class="vis"></div>
+        <figcaption>Share of Australians aged 15 and over attending each art form, 2022 and 2025. Source: Creative Australia, National Arts Participation Survey 2025.</figcaption>
+      </figure>
     </div>
-    <figure class="full">
-      <div id="vis-slopes" class="vis"></div>
-      <figcaption>Share of Australians aged 15 and over attending each art form, 2022 and 2025. Source: Creative Australia, National Arts Participation Survey 2025.</figcaption>
-    </figure>
   </section>
 
   <!-- 4 ─ Where you live matters -->
   <section id="where">
     <h2><span class="num">04</span> Where you live matters</h2>
-    <p class="prose">Attendance fell in every state and territory between 2017–18 and 2021–22, with Victoria dropping furthest (from 84% to 61%); hover over a state to highlight it in the bar chart.</p>
-    <figure class="full">
-      <div id="vis-choropleth" class="vis"></div>
-      <figcaption>Adults attending a cultural venue or event, by state. Source: ABS.</figcaption>
-    </figure>
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-md-1-2 prose">
+        <p>Attendance fell in every state and territory between 2017–18 and 2021–22, with Victoria dropping furthest (from 84% to 61%); hover over a state to highlight it in the bar chart.</p>
+        <p>The ACT had the highest attendance in both surveys (93% in 2017–18 and 72% in 2021–22), while the Northern Territory had the smallest fall, from 76% to 69%. Use the buttons under the map to switch between the two surveys.</p>
+        <p>Live performance is even more concentrated. New South Wales and Victoria hosted 64% of all tickets sold in 2024, and the dot map shows museums, galleries and theatres clustered along the east coast and around the capital cities.</p>
+        <p>Distance matters to audiences too: in 2025, 76% of people living in major cities attended an arts event or festival, compared with 69% in regional and remote areas.</p>
+      </div>
+      <figure class="pure-u-1 pure-u-md-1-2">
+        <div id="vis-choropleth" class="vis"></div>
+        <figcaption>Adults attending a cultural venue or event, by state. Source: ABS.</figcaption>
+      </figure>
+    </div>
     <div class="pure-g">
       <figure class="pure-u-1 pure-u-md-1-2">
         <div id="vis-symbol" class="vis"></div>
@@ -107,25 +127,32 @@
   <!-- 5 ─ The price of culture -->
   <section id="cost">
     <h2><span class="num">05</span> The price of culture</h2>
-    <p class="prose">Cost is now the biggest barrier to attending the arts, named by 60% of Australians in 2025 compared with 55% in 2022.</p>
     <div class="pure-g">
+      <div class="pure-u-1 pure-u-md-1-2 prose">
+        <p>Cost is now the biggest barrier to attending the arts, named by 60% of Australians in 2025 compared with 55% in 2022.</p>
+        <p>Distance (42%) and difficulty getting there (29%) also rose slightly, while safety concerns almost halved, from 20% to 11%, suggesting COVID-19 worries have eased.</p>
+        <p>Cost changes behaviour as well as attendance: 55% of Australians skipped an event they wanted to see because of the price, and 47% delayed buying tickets until they were sure they could afford them.</p>
+        <p>Prices are rising at the same time. The average live performance ticket reached $115 in 2024, and contemporary music alone earned 54% of all ticket revenue.</p>
+      </div>
       <figure class="pure-u-1 pure-u-md-1-2">
         <div id="vis-barriers" class="vis"></div>
         <figcaption>Change in the share of Australians naming each barrier, 2022 to 2025. The number beside each bar is the 2025 share. Source: Creative Australia, National Arts Participation Survey 2025, Figure 29.</figcaption>
       </figure>
-      <figure class="pure-u-1 pure-u-md-1-2">
-        <div id="vis-treemap" class="vis"></div>
-        <figcaption>Live performance revenue by art form, 2024. Source: Live Performance Australia.</figcaption>
-      </figure>
     </div>
     <figure class="full">
       <div id="vis-cost-impact" class="vis"></div>
-      <figcaption>How cost shaped ticket buying over the past 12 months. Source: Creative Australia, National Arts Participation Survey 2025, Figure 30.</figcaption>
+      <figcaption>How cost shaped ticket buying over the past 12 months. "Didn't buy tickets" is shown separately because those people gave no opinion. Source: Creative Australia, National Arts Participation Survey 2025, Figure 30.</figcaption>
     </figure>
-    <figure class="full">
-      <div id="vis-who" class="vis"></div>
-      <figcaption>Who attended a live arts event or festival in 2025. Source: Creative Australia, National Arts Participation Survey 2025.</figcaption>
-    </figure>
+    <div class="pure-g">
+      <figure class="pure-u-1 pure-u-md-1-2">
+        <div id="vis-treemap" class="vis"></div>
+        <figcaption>Share of live performance revenue by art form, 2024. Circus (0.7%) and special events (0.3%) are too small to label; hover for values. Source: Live Performance Australia.</figcaption>
+      </figure>
+      <figure class="pure-u-1 pure-u-md-1-2">
+        <div id="vis-who" class="vis"></div>
+        <figcaption>Who attended a live arts event or festival in 2025. Source: Creative Australia, National Arts Participation Survey 2025.</figcaption>
+      </figure>
+    </div>
   </section>
 </main>
 <script src="js/main.js"></script>

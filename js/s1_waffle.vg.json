@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Waffle chart: 100 squares, each one in 100 Australians aged 15+. Filled squares = share who attended a live arts event or festival in 2025.",
-  "width": 300,
-  "height": 300,
+  "width": 360,
+  "height": 360,
   "data": { "sequence": { "start": 0, "stop": 100, "as": "i" } },
   "transform": [
     { "calculate": "'attended_live_arts'", "as": "metric" },
@@ -18,7 +18,7 @@
     { "calculate": "floor(datum.i / 10)", "as": "row" },
     { "calculate": "datum.i < round(datum.value) ? 'Attended' : 'Did not attend'", "as": "status" }
   ],
-  "mark": { "type": "square", "size": 520, "cornerRadius": 4 },
+  "mark": { "type": "square", "size": 800, "cornerRadius": 4 },
   "encoding": {
     "x": { "field": "col", "type": "ordinal", "axis": null },
     "y": { "field": "row", "type": "ordinal", "axis": null, "sort": "descending" },

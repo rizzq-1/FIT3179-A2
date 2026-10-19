@@ -36,6 +36,6 @@
         "text": { "field": "pct_2025", "type": "quantitative", "format": "d" }
       }
     },
-    { "mark": { "type": "rule", "color": "#52514e" }, "encoding": { "x": { "datum": 0 }, "y": { "value": 0 }, "y2": { "value": 300 } } }
+    { "mark": { "type": "rule", "color": "#52514e" }, "encoding": { "x": { "datum": 0 } } }
   ]
 }

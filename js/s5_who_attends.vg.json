@@ -27,7 +27,7 @@
     },
     {
       "mark": { "type": "rule", "color": "#52514e", "strokeDash": [4, 3] },
-      "encoding": { "x": { "datum": 74 }, "y": { "value": 0 }, "y2": { "value": 340 } }
+      "encoding": { "x": { "datum": 74 }, "y": null }
     },
     {
       "mark": { "type": "text", "align": "left", "dx": 5, "dy": -6, "fontSize": 11, "color": "#52514e", "text": "All Australians: 74%" },

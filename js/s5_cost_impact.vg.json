@@ -10,7 +10,7 @@
   ],
   "hconcat": [
     {
-      "width": 640,
+      "width": 520,
       "height": 220,
       "transform": [{ "filter": "datum.response !== \"Didn't buy tickets\"" }],
       "encoding": {
@@ -54,7 +54,7 @@
         {
           "data": { "values": [{ "zero": 0 }] },
           "mark": { "type": "rule", "color": "#52514e" },
-          "encoding": { "x": { "field": "zero", "type": "quantitative" }, "y": null }
+          "encoding": { "x": { "field": "zero", "type": "quantitative" }}
         }
       ]
     },
