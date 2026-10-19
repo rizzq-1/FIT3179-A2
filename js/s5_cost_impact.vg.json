@@ -1,55 +1,91 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Diverging stacked bar: responses to four statements about the cost of arts events (2025). Agreement extends right of the centre line; all other answers extend left.",
-  "width": "container",
-  "height": 220,
+  "description": "Diverging stacked bar: responses to four statements about the cost of arts events (2025). Agree extends right, Disagree extends left, Neither is centred on zero. People who didn't buy tickets gave no opinion, so they are shown in a separate column instead of being stacked with Disagree.",
   "data": { "url": "data/naps_cost_impact.csv", "format": { "type": "csv", "parse": { "pct": "number" } } },
   "transform": [
-    { "calculate": "datum.response === 'Agree' ? datum.pct : -datum.pct", "as": "signed" },
-    { "calculate": "indexof(['Agree', 'Neither', 'Disagree', \"Didn't buy tickets\"], datum.response)", "as": "position" }
+    { "calculate": "datum.response === 'Neither' ? datum.pct : 0", "as": "neither_part" },
+    { "joinaggregate": [{ "op": "sum", "field": "neither_part", "as": "neither" }], "groupby": ["statement"] },
+    { "calculate": "datum.response === 'Agree' ? datum.neither / 2 : datum.response === 'Neither' ? -datum.neither / 2 : -datum.neither / 2 - datum.pct", "as": "x_start" },
+    { "calculate": "datum.x_start + datum.pct", "as": "x_end" }
   ],
-  "encoding": {
-    "y": { "field": "statement", "type": "nominal", "title": null, "sort": null, "axis": { "labelLimit": 300 } }
-  },
-  "layer": [
+  "hconcat": [
     {
-      "mark": { "type": "bar", "height": { "band": 0.65 }, "stroke": "#fcfcfb", "strokeWidth": 2 },
+      "width": 640,
+      "height": 220,
+      "transform": [{ "filter": "datum.response !== \"Didn't buy tickets\"" }],
       "encoding": {
-        "x": {
-          "field": "signed",
-          "type": "quantitative",
-          "stack": "zero",
-          "title": "Per cent of Australians aged 15 and over",
-          "scale": { "domain": [-80, 60] },
-          "axis": { "labelExpr": "abs(datum.value)" }
+        "y": { "field": "statement", "type": "nominal", "title": null, "sort": null, "axis": { "labelLimit": 300 } }
+      },
+      "layer": [
+        {
+          "mark": { "type": "bar", "height": { "band": 0.65 }, "stroke": "#fcfcfb", "strokeWidth": 2 },
+          "encoding": {
+            "x": {
+              "field": "x_start",
+              "type": "quantitative",
+              "title": "Per cent of Australians aged 15 and over",
+              "scale": { "domain": [-40, 70] },
+              "axis": { "labelExpr": "abs(datum.value)" }
+            },
+            "x2": { "field": "x_end" },
+            "color": {
+              "field": "response",
+              "type": "nominal",
+              "title": null,
+              "scale": { "domain": ["Disagree", "Neither", "Agree"], "range": ["#e34948", "#c9c6bf", "#2a78d6"] },
+              "legend": { "orient": "top" }
+            },
+            "tooltip": [
+              { "field": "statement", "title": "Statement" },
+              { "field": "response", "title": "Answer" },
+              { "field": "pct", "title": "Per cent" }
+            ]
+          }
         },
-        "order": { "field": "position", "type": "quantitative" },
-        "color": {
-          "field": "response",
-          "type": "nominal",
-          "title": null,
-          "scale": {
-            "domain": ["Agree", "Neither", "Disagree", "Didn't buy tickets"],
-            "range": ["#2a78d6", "#c9c6bf", "#e34948", "#ece9e3"]
-          },
-          "legend": { "orient": "top" }
+        {
+          "description": "Direct label at the end of the Agree segment.",
+          "transform": [{ "filter": "datum.response === 'Agree'" }],
+          "mark": { "type": "text", "align": "left", "dx": 6, "fontSize": 12, "fontWeight": 600, "color": "#1b1a18" },
+          "encoding": {
+            "x": { "field": "x_end", "type": "quantitative" },
+            "text": { "field": "pct", "type": "quantitative", "format": "d" }
+          }
         },
-        "tooltip": [
-          { "field": "statement", "title": "Statement" },
-          { "field": "response", "title": "Answer" },
-          { "field": "pct", "title": "Per cent" }
-        ]
-      }
+        {
+          "data": { "values": [{ "zero": 0 }] },
+          "mark": { "type": "rule", "color": "#52514e" },
+          "encoding": { "x": { "field": "zero", "type": "quantitative" }, "y": null }
+        }
+      ]
     },
     {
-      "description": "Direct label on the 'Agree' segment only.",
-      "transform": [{ "filter": "datum.response === 'Agree'" }],
-      "mark": { "type": "text", "align": "left", "dx": 6, "fontSize": 12, "fontWeight": 600, "color": "#1b1a18" },
+      "width": 90,
+      "height": 220,
+      "title": { "text": "Didn't buy tickets", "fontSize": 12, "font": "Source Sans 3", "anchor": "start" },
+      "transform": [{ "filter": "datum.response === \"Didn't buy tickets\"" }],
       "encoding": {
-        "x": { "field": "pct", "type": "quantitative" },
-        "text": { "field": "pct", "type": "quantitative", "format": "d" }
-      }
-    },
-    { "mark": { "type": "rule", "color": "#52514e" }, "encoding": { "x": { "datum": 0 }, "y": { "value": 0 }, "y2": { "value": 220 } } }
-  ]
+        "y": { "field": "statement", "type": "nominal", "title": null, "sort": null, "axis": null }
+      },
+      "layer": [
+        {
+          "mark": { "type": "bar", "height": { "band": 0.65 }, "color": "#d8d5ce" },
+          "encoding": {
+            "x": { "field": "pct", "type": "quantitative", "title": "%", "scale": { "domain": [0, 40] }, "axis": { "tickCount": 2 } },
+            "tooltip": [
+              { "field": "statement", "title": "Statement" },
+              { "field": "pct", "title": "Didn't buy tickets (%)" }
+            ]
+          }
+        },
+        {
+          "mark": { "type": "text", "align": "left", "dx": 4, "fontSize": 11, "color": "#52514e" },
+          "encoding": {
+            "x": { "field": "pct", "type": "quantitative" },
+            "text": { "field": "pct", "type": "quantitative", "format": "d" }
+          }
+        }
+      ]
+    }
+  ],
+  "spacing": 28
 }

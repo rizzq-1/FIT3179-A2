@@ -4,9 +4,9 @@
   "width": "container",
   "height": 340,
   "data": { "url": "data/naps_attendance_groups.csv", "format": { "type": "csv", "parse": { "rate": "number" } } },
-  "transform": [{ "calculate": "datum.dimension + ': ' + datum.group", "as": "label" }],
+  "transform": [{ "calculate": "{'Age': 'Aged ', 'Where they live': '', 'Income': 'Earning ', 'Disability': '', 'Learned an art form at school age': 'Learned art at school: '}[datum.dimension] + datum.group", "as": "label" }],
   "encoding": {
-    "y": { "field": "label", "type": "nominal", "title": null, "sort": null, "axis": { "labelLimit": 260, "grid": true } },
+    "y": { "field": "label", "type": "nominal", "title": null, "sort": null, "axis": { "labelLimit": 190, "grid": true } },
     "x": { "field": "rate", "type": "quantitative", "title": "Attended a live arts event or festival, 2025 (%)", "scale": { "domain": [50, 90] } }
   },
   "layer": [

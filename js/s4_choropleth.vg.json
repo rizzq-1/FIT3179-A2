@@ -13,10 +13,10 @@
       }
     }
   ],
-  "hconcat": [
+  "vconcat": [
     {
-      "width": 520,
-      "height": 420,
+      "width": 340,
+      "height": 290,
       "projection": { "type": "conicEqualArea", "parallels": [-18, -36], "rotate": [-132, 0] },
       "layer": [
     {
@@ -44,8 +44,8 @@
           "field": "rate",
           "type": "quantitative",
           "title": "Adults attending (%)",
-          "scale": { "domain": [50, 95], "range": ["#cde2fb", "#0d366b"] },
-          "legend": { "orient": "bottom-left", "direction": "horizontal", "gradientLength": 180 }
+          "scale": { "type": "threshold", "domain": [65, 70, 80, 85], "range": ["#b7d3f6", "#6da7ec", "#2a78d6", "#184f95", "#0d366b"] },
+          "legend": { "orient": "top", "direction": "horizontal", "gradientLength": 300, "title": "Adults attending (%)" }
         },
         "stroke": {
           "condition": { "test": "vlSelectionTest('hoverState_store', datum, 'union', false) || vlSelectionTest('hoverBar_store', datum, 'union', false)", "value": "#1b1a18" },
@@ -61,8 +61,8 @@
       ]
     },
     {
-      "width": 260,
-      "height": 420,
+      "width": 220,
+      "height": 200,
       "data": { "url": "data/abs_attendance_state.csv", "format": { "type": "csv", "parse": { "rate_2017_18": "number", "rate_2021_22": "number" } } },
       "transform": [{ "calculate": "datum.rate_2021_22 - datum.rate_2017_18", "as": "change" }],
       "params": [

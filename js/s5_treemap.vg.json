@@ -1,16 +1,31 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "description": "Treemap (Vega): live-performance revenue by category in 2024. Area = revenue.",
-  "width": 460,
-  "height": 340,
+  "description": "Treemap (Vega): share of live-performance revenue by category in 2024. Area = revenue; each box is labelled with its share where it fits.",
+  "height": 360,
   "padding": 0,
   "autosize": "none",
+  "signals": [
+    {
+      "name": "width",
+      "init": "containerSize()[0] || 460",
+      "on": [{ "events": "window:resize", "update": "containerSize()[0] || 460" }]
+    }
+  ],
   "data": [
     {
       "name": "raw",
       "url": "data/lpa_genre_year.csv",
       "format": { "type": "csv", "parse": { "year": "number", "revenue": "number" } },
-      "transform": [{ "type": "filter", "expr": "datum.year === 2024 && isValid(datum.revenue)" }]
+      "transform": [
+        { "type": "filter", "expr": "datum.year === 2024 && isValid(datum.revenue)" },
+        { "type": "joinaggregate", "fields": ["revenue"], "ops": ["sum"], "as": ["total"] },
+        { "type": "formula", "as": "share", "expr": "datum.revenue / datum.total" },
+        {
+          "type": "formula",
+          "as": "short_name",
+          "expr": "({'Festivals (Contemporary Music)': 'Music festivals', 'Festivals (Multi-Category)': 'Multi-arts festivals', 'Circus and Physical Theatre': 'Circus', \"Children's/Family\": \"Children's\", 'Ballet and Dance': 'Ballet and dance', 'Classical Music': 'Classical'})[datum.genre] || datum.genre"
+        }
+      ]
     },
     {
       "name": "tree",
@@ -38,7 +53,11 @@
           "paddingInner": 2,
           "size": [{ "signal": "width" }, { "signal": "height" }]
         },
-        { "type": "filter", "expr": "datum.id !== 'root'" }
+        { "type": "filter", "expr": "datum.id !== 'root'" },
+        { "type": "formula", "as": "w", "expr": "datum.x1 - datum.x0" },
+        { "type": "formula", "as": "h", "expr": "datum.y1 - datum.y0" },
+        { "type": "formula", "as": "show_name", "expr": "datum.w > 60 && datum.h > 36" },
+        { "type": "formula", "as": "show_share", "expr": "datum.w > 30 && datum.h > 18" }
       ]
     }
   ],
@@ -47,15 +66,13 @@
       "type": "rect",
       "from": { "data": "all" },
       "encode": {
-        "enter": {
+        "update": {
           "x": { "field": "x0" },
           "y": { "field": "y0" },
           "x2": { "field": "x1" },
           "y2": { "field": "y1" },
           "cornerRadius": { "value": 3 },
-          "tooltip": { "signal": "{'Category': datum.genre, 'Revenue ($m)': format(datum.revenue, ',.0f')}" }
-        },
-        "update": {
+          "tooltip": { "signal": "{'Category': datum.genre, 'Revenue ($m)': format(datum.revenue, ',.0f'), 'Share of revenue': format(datum.share, '.1%')}" },
           "fill": { "signal": "datum.genre === 'Contemporary Music' ? '#2a78d6' : '#86b6ef'" },
           "opacity": { "value": 1 }
         },
@@ -63,18 +80,36 @@
       }
     },
     {
+      "description": "Category name, only where the box is big enough to read it.",
       "type": "text",
       "from": { "data": "all" },
       "interactive": false,
       "encode": {
-        "enter": {
+        "update": {
           "x": { "signal": "datum.x0 + 6" },
           "y": { "signal": "datum.y0 + 16" },
-          "text": { "signal": "(datum.x1 - datum.x0) > 70 && (datum.y1 - datum.y0) > 22 ? datum.genre : ''" },
-          "limit": { "signal": "datum.x1 - datum.x0 - 10" },
+          "text": { "signal": "datum.show_name ? datum.short_name : ''" },
+          "limit": { "signal": "datum.w - 10" },
           "font": { "value": "Source Sans 3" },
           "fontSize": { "value": 12 },
           "fontWeight": { "value": 600 },
+          "fill": { "signal": "datum.genre === 'Contemporary Music' ? '#ffffff' : '#0d366b'" }
+        }
+      }
+    },
+    {
+      "description": "Share of total revenue, below the name, or alone in boxes too small for the name.",
+      "type": "text",
+      "from": { "data": "all" },
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": { "signal": "datum.x0 + 6" },
+          "y": { "signal": "datum.y0 + (datum.show_name ? 22 : 5)" },
+          "text": { "signal": "datum.show_share ? format(datum.share, datum.share < 0.01 ? '.1%' : '.0%') : ''" },
+          "font": { "value": "Source Sans 3" },
+          "fontSize": { "signal": "datum.genre === 'Contemporary Music' ? 22 : 12" },
+          "baseline": { "value": "top" },
           "fill": { "signal": "datum.genre === 'Contemporary Music' ? '#ffffff' : '#0d366b'" }
         }
       }

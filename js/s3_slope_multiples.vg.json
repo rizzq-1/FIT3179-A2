@@ -4,11 +4,11 @@
   "data": { "url": "data/naps_artform_year.csv", "format": { "type": "csv", "parse": { "rate": "number" } } },
   "transform": [{ "filter": "isValid(datum.rate)" }],
   "facet": { "field": "artform", "type": "nominal", "title": null, "sort": ["Any live arts event", "Music", "Festivals", "Visual arts and craft", "Theatre", "First Nations arts", "Dance", "Literary events"], "header": { "labelFontWeight": 600, "labelAnchor": "start" } },
-  "columns": 8,
+  "columns": 4,
   "spacing": 14,
   "spec": {
     "width": 88,
-    "height": 200,
+    "height": 120,
     "encoding": {
       "x": { "field": "year", "type": "ordinal", "title": null, "axis": { "labelAngle": 0, "domain": false, "ticks": false }, "scale": { "padding": 0.6 } },
       "y": { "field": "rate", "type": "quantitative", "title": "Attended (%)", "scale": { "domain": [0, 80] }, "axis": { "tickCount": 4 } }
