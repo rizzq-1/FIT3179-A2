@@ -1,30 +1,8 @@
-# Back to the Show? Australia's Cultural Comeback
+# Australia’s Creative Pulse
 
 FIT3179 Data Visualisation 2 (Semester 2, 2026) by Adam Rizq Rozman.
 
 **Research question:** Has Australians' return to cultural life after COVID-19 been shared equally across age groups and regions, or has rising cost changed who participates?
-
-## Run locally
-
-Vega loads the data with `fetch`, so the page has to be served over HTTP. Opening the file directly will not work:
-
-```bash
-python3 -m http.server 8000
-```
-
-Then open <http://localhost:8000>.
-
-## Layout
-
-```
-index.html          page and narrative (Pure.css grid layout)
-css/style.css       typography and grid gutters
-js/main.js          shared chart theme, embeds every spec
-js/*.vg.json        one human-readable Vega-Lite (or Vega, for the treemap) spec per chart
-js/aus_states.topojson  state boundaries (TopoJSON, ~95 KB, converted with mapshaper)
-data/               CSV inputs (see the provenance list below)
-sketch/             put the scanned A4 sketch PDF here
-```
 
 ## Charts
 
@@ -75,4 +53,4 @@ Every value is copied from the published source. Scripts read the ABS spreadshee
 
 ## AI acknowledgement
 
-Claude (Anthropic) was used to scaffold the page structure and chart specifications. All data values, narrative text and the hand-drawn sketch are the author's own.
+AI (Claude, Anthropic) was used to help improve the graphics, sentences and page layout. All data and analysis are the author's own

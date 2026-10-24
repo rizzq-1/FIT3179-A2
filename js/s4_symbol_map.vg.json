@@ -32,14 +32,20 @@
           "type": "quantitative",
           "title": "Tickets per 1,000 residents",
           "scale": { "range": [80, 2400] },
-          "legend": { "orient": "bottom", "direction": "horizontal", "values": [200, 600, 1000, 1400], "symbolFillColor": "#c9c6bf", "symbolStrokeColor": "#8a8883" }
+          "legend": { "orient": "bottom", "direction": "horizontal", "titleLimit": 300, "values": [200, 600, 1000, 1400], "symbolFillColor": "#c9c6bf", "symbolStrokeColor": "#8a8883" }
         },
         "color": {
           "field": "change_pct",
           "type": "quantitative",
-          "title": "Change from 2023 (%)",
-          "scale": { "domainMid": 0, "range": ["#e34948", "#f0efec", "#2a78d6"], "interpolate": "lab" },
-          "legend": { "orient": "bottom", "direction": "horizontal", "gradientLength": 140 }
+          "title": "Tickets sold, change from 2023",
+          "scale": { "type": "threshold", "domain": [-5, 0, 5], "range": ["#b8312f", "#f08c8a", "#7fb0ea", "#1f5fae"] },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "symbolType": "circle",
+            "titleLimit": 300,
+            "labelExpr": "['Fell over 5%', 'Fell 0–5%', 'Grew 0–5%', 'Grew over 5%'][datum.index]"
+          }
         },
         "tooltip": [
           { "field": "state", "title": "State" },
