@@ -12,7 +12,7 @@
   --font-body: "Source Sans 3", "Helvetica Neue", Arial, sans-serif;
 
   --measure: 66ch;
-  --page: 1040px;
+  --page: 1360px;
   --gap: 32px;
 }
 
@@ -108,6 +108,10 @@ figcaption {
 
 .vis { width: 100%; min-height: 120px; }
 .vis .vega-embed { width: 100%; }
+/* Fixed-width specs (concat views can't use "container" width): centre them in their column. */
+#vis-waffle .vega-embed,
+#vis-choropleth .vega-embed,
+#vis-cost-impact .vega-embed { display: flex; flex-direction: column; align-items: center; }
 
 /* ── Footer / metadata ─────────────────────── */
 .meta {
