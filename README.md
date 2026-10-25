@@ -53,4 +53,4 @@ Every value is copied from the published source. Scripts read the ABS spreadshee
 
 ## AI acknowledgement
 
-AI (Claude, Anthropic) was used to help improve the graphics, sentences and page layout. All data and analysis are the author's own
+Throughout this assignment, I made use of Claude (Anthropic). It located and cleaned the data, put up the CSS and page layout, and worked with me to write and revise the chart specifications, outlining how each one functions. Every alteration was inspected, tested, and the numbers were compared to the original source.
